@@ -8,7 +8,6 @@ def parse_rmc(line):
         return None
 
     parts = line.strip().split(',')
-    print(len(parts))
     if len(parts) < 12 or parts[2] != 'A':  # Check for Active fix
         return None
 
@@ -19,7 +18,6 @@ def parse_rmc(line):
         lat = lat_deg + lat_min / 60.0
         if parts[4] == 'S':
             lat = -lat
-        print(lat)
         # Longitude
         lon_deg = float(parts[5][:3])
         lon_min = float(parts[5][3:])
@@ -65,7 +63,6 @@ def main():
     for line in lines:
         point = parse_rmc(line)
         if point:
-            print(point)
             points.append(point)
 
     if not points:

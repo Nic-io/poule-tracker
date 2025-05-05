@@ -8,6 +8,6 @@
 #include <ff.h>
 
 
-int init_logging(char* filename);
+int init_logging_tosd(char* filename);
 
-int log_line(char *data);
+int log_line_tosd(char *data);

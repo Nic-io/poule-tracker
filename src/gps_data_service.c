@@ -82,10 +82,45 @@ int get_sentence(char *sentence_type, char *sentence)
     }
 }
 
-int get_date_time(char* time_str, char* date_str)
+int get_date_time(char* datetime)
 {
+    int date_position = 9;
+    int time_position = 1;
+
     char buffer[GPS_MSG_SIZE];
+    int buffer_pos=0;
+    int outputpos=0;
     while(get_sentence("$GPRMC", buffer) != 0){
         k_sleep(K_USEC(1));
     }
+/*
+    //Scroll for Date
+    for(int i=0; i < date_position ; i++){
+        while(buffer[buffer_pos]!=','){
+            buffer_pos++;
+        }
+        buffer_pos++;
+    }
+    for(int i = 0; i < 4; i++){
+        datetime[outputpos]=buffer[buffer_pos];
+        outputpos++;
+        buffer_pos++;
+    }
+    datetime[outputpos++]='_';
+*/
+    //Scroll for time
+    buffer_pos=0;
+    for(int i = 0; i < time_position ; i++){
+        while(buffer[buffer_pos]!=','){
+            buffer_pos++;
+        }
+        buffer_pos++;
+    }
+    for(int i = 0; i < 4; i++){
+        datetime[outputpos]=buffer[buffer_pos];
+        outputpos++;
+        buffer_pos++;
+    }
+    datetime[outputpos]='\0';
+    LOG_INF("datetime %s", datetime);
 }

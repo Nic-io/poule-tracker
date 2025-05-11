@@ -11,6 +11,6 @@ int init_gps_service();
 
 void serial_cb(const struct device *dev, void *user_data);
 
-int get_date_time(char* time_str, char* date_str);
+int get_date_time(char* datetime);
 
 int get_sentence(char *sentence_type, char *sentence);
